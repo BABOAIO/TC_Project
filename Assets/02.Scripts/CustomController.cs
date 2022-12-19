@@ -14,9 +14,9 @@ public class CustomController : MonoBehaviour
     private GameObject controllerInstance;
     private InputDevice availableDevice;
 
-    public bool renderController; // Hand와 Controller 사이를 변경할 변수
-    public GameObject handModel;   // 핸드 모델
-    private GameObject handInstance; // 핸드 인스턴스
+    public bool renderController;       // Hand와 Controller 사이를 변경할 변수
+    public GameObject handModel;        // 핸드 모델
+    private GameObject handInstance;    // 핸드 인스턴스
 
     private Animator handModelAnimator; // 핸드 모델 애니메이션 변수
 
