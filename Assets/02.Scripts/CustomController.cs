@@ -88,7 +88,6 @@ public class CustomController : MonoBehaviour
         if (!availableDevice.isValid)
         {
             TryInitialize();
-            return;
         }
         if (renderController)
         {

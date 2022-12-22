@@ -18,7 +18,6 @@ namespace Project.Scripts.Fractures
                 var node = bodies[i].GetOrAddComponent<ChunkNode>();
                 node.Setup();
                 nodes[i] = node;
-                node.tag = "Score";
             }
         }
         
