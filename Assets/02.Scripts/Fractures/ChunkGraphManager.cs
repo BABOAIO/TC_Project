@@ -9,6 +9,14 @@ namespace Project.Scripts.Fractures
     public class ChunkGraphManager : MonoBehaviour
     {
         private ChunkNode[] nodes;
+        public int score;
+        public bool gotScore_Fracture;
+
+        private void Start()
+        {
+            gotScore_Fracture = false;
+            print($"point : {score}");
+        }
 
         public void Setup(Rigidbody[] bodies)
         {

@@ -9,6 +9,7 @@ namespace Project.Scripts.Fractures
     {
         public static ChunkGraphManager FractureGameObject(GameObject gameObject, Anchor anchor, int seed, int totalChunks,Material insideMaterial, Material outsideMaterial, float jointBreakForce, float density)
         {
+
             // Translate all meshes to one world mesh
             var mesh = GetWorldMesh(gameObject);
             
@@ -45,8 +46,10 @@ namespace Project.Scripts.Fractures
             }
             // Graph manager freezes/unfreezes blocks depending on whether they are connected to the graph or not
             var graphManager = fractureGameObject.AddComponent<ChunkGraphManager>();
+            graphManager.score = totalChunks;
+
             graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());
-            
+          
             return graphManager;
         }
 
@@ -198,7 +201,7 @@ namespace Project.Scripts.Fractures
             return true;
         }
 
-        private static GameObject BuildChunk(Material insideMaterial, Material outsideMaterial, Mesh mesh, float mass)
+        private static GameObject BuildChunk(Material insideMaterial, Material outsideMaterial, Mesh mesh, float mass                                                                                                                                                        )
         {
             var chunk = new GameObject($"Chunk");
             
@@ -216,6 +219,7 @@ namespace Project.Scripts.Fractures
             rigibody.mass = mass;
 
             var mc = chunk.AddComponent<MeshCollider>();
+            var gs = chunk.AddComponent<ReadytoGetScore>();
             mc.inflateMesh = true;
             mc.convex = true;
 
