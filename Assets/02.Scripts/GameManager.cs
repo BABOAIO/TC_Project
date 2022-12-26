@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
 
     public int stackScore;
+    public bool isGameOver;
+    public GameObject gameOverText;
 
     public static GameManager Instance
     {
@@ -41,6 +43,13 @@ public class GameManager : MonoBehaviour
         stackScore += pt;
 
         Debug.Log( $"누적점수 : {stackScore}");
+    }
+
+
+    public void EndGame()
+    {
+        isGameOver = true;
+        gameOverText.SetActive(true);
     }
 
     void Start()
