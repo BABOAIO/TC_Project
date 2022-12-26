@@ -16,7 +16,7 @@ public class AshTraySpawner : MonoBehaviour
     void Start()
     {
         timeAfterSpawn = 0f;
-        target = FindObjectOfType<Player>().transform;
+        //target = FindObjectOfType<Player>().transform;
     }
 
     // Update is called once per frame
