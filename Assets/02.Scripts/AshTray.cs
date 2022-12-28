@@ -5,7 +5,7 @@ using UnityEngine;
 public class AshTray : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float speed = 25f;
+    public float speed = 50f;
     public float attackAmount = 10.0f;
     private Rigidbody AshRigidbody;
 

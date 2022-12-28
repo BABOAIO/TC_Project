@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance = null;
+    private static GameManager instance;
 
     public int stackScore;
     public bool isGameOver;
     public GameObject gameOverText;
+
+    public Text scoreText;
+    public int nextStage = 0;
+
 
     public static GameManager Instance
     {
@@ -41,6 +47,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int pt)
     {
         stackScore += pt;
+        scoreText.text = "SCORE : " + stackScore;
 
         Debug.Log( $"누적점수 : {stackScore}");
     }
@@ -60,5 +67,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if(nextStage <= stackScore)
+        //{
+        //    SceneManager.LoadScene(1);
+        //}
     }
 }

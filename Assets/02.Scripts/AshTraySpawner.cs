@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static AshTraySpawner;
 
 public class AshTraySpawner : MonoBehaviour
 {
@@ -10,20 +12,29 @@ public class AshTraySpawner : MonoBehaviour
     public GameObject AshPrefab;        // 재떨이 프리팹
     public Transform AshLocation;       // 재떨이가 발사될 위치
     // public float spawnRate = 1.0f;
-    public float AshTime = 1.0f;               // 재떨이 발사 시간
-    private Transform target;           // 플레이어를 향해
-    private float spawnTime = 0;
-    private float timeAfterSpawn;
+     public float AshTime = 1.0f;        // 재떨이 발사 시간
+    private Transform target;          // 플레이어를 향해
+    // private float spawnTime = 0;
+    // private float timeAfterSpawn;
     private Animator animator;
     private int hp = 100;
-
+    int loopNum = 0;
     private bool isDie = false;         // 슈트맨의 사망 여부
-
+    private bool StandUp = false;
+    private float currentTime = 0;
+    public float DelayTime = 5;
+    public float spawnHeight = 2.3f;
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindWithTag("Player").GetComponent<Transform>();
         animator = this.gameObject.GetComponent<Animator>();
+
+        Invoke("SuitStandUp", 5.0f);
+
+        //animator.SetBool("StandUp", false);
+        //StartCoroutine(this.CheckSuitManState());
+        
         //StartCoroutine(Ash());
     }
 
@@ -31,37 +42,40 @@ public class AshTraySpawner : MonoBehaviour
     void Update()
     {
         //timeAfterSpawn= Time.deltaTime;
-        //if(timeAfterSpawn >= spawnTime)
+        //if(StandUp)
         //{
-        //    timeAfterSpawn = 0f;
+           
 
-        //    GameObject Ash = Instantiate(AshPrefab, AshLocation.position, AshLocation.rotation);
+           
+          currentTime += 1;
+          
 
-        //    Ash.transform.LookAt(target);
+    
 
+        // StartCoroutine(this.SuitManAction());
 
-        //}
-        StartCoroutine(this.SuitManAction());
-    }
-    IEnumerator SuitManAction()
-    {
-        while (!isDie)
+        //print(suitmanState);
+        if(spawnHeight <= AshLocation.transform.position.y)
         {
-            switch (suitmanState)
+            if (currentTime > DelayTime)
             {
-                case SuitManState.idle:
-                    animator.SetBool("StandUp", false);
-                    break;
-
-                case SuitManState.attack:
-                    animator.SetBool("StandUp", true);
-                    break;
-
+                GameObject AshTray = Instantiate(AshPrefab, AshLocation.position, AshLocation.rotation);
+                AshTray.transform.LookAt(target);
+                currentTime = 0;
             }
+           
         }
 
-        yield return null;
+        
     }
+
+    public void SuitStandUp()
+    {
+        suitmanState = SuitManState.attack;
+        animator.SetBool("StandUp", true);
+        StandUp = true;
+    }
+
     IEnumerator Ash()
     {
         Instantiate(AshPrefab, AshLocation.position, AshLocation.rotation);
@@ -88,10 +102,11 @@ public class AshTraySpawner : MonoBehaviour
         StopAllCoroutines();
         isDie = true;
         suitmanState = SuitManState.die;
-        animator.SetBool("StandUp", false);
         animator.SetTrigger("IsDie");
 
-        // 외계인은 2점!
+
+
+        // 점수 10000
         FindObjectOfType<GameManager>().AddScore(10000);
 
     }
