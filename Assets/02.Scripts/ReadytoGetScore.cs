@@ -7,14 +7,17 @@ public class ReadytoGetScore : MonoBehaviour
 {
     int _score;
 
+    AudioSource audio;
+
     private void Start()
     {
         this.tag = "CHUNK";
+        audio = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("ASHTRAY"))
+        if (collision.gameObject.CompareTag("SELECTABLE"))
         {
             if (GetComponentInParent<ChunkGraphManager>().gotScore_Fracture) return;
 
@@ -25,6 +28,8 @@ public class ReadytoGetScore : MonoBehaviour
             GetComponentInParent<ChunkGraphManager>().gotScore_Fracture = true;
 
             GameManager.Instance.AddScore(_score);
+
+            audio.Play();
         }
     }
 }

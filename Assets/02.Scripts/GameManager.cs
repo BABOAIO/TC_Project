@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    private static GameManager instance = null;
 
     public int stackScore;
-    public bool isGameOver;
-    public GameObject gameOverText;
 
     public Text scoreText;
-    public int nextStage = 0;
 
+    [SerializeField]
+    [Header("다음 씬으로 넘어가는 점수")]
+    private int nextStage = 0;
+    private bool isGameOver = false;
+    public AudioClip audioClip;
+    public GameObject gameOverText;
 
     public static GameManager Instance
     {
@@ -47,29 +50,29 @@ public class GameManager : MonoBehaviour
     public void AddScore(int pt)
     {
         stackScore += pt;
+
         scoreText.text = "SCORE : " + stackScore;
 
         Debug.Log( $"누적점수 : {stackScore}");
     }
-
 
     public void EndGame()
     {
         isGameOver = true;
         gameOverText.SetActive(true);
     }
-
     void Start()
     {
-        
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(nextStage <= stackScore)
-        //{
-        //    SceneManager.LoadScene(1);
-        //}
+        if(stackScore >= nextStage)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
+
 }
