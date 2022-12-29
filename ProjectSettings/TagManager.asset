@@ -8,6 +8,7 @@ TagManager:
   - CHUNK
   - SELETABLE
   - SELECTABLE
+  - PlayerAsh
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     private bool isGameOver = false;
     public AudioClip audioClip;
     public GameObject gameOverText;
+    public Vector3 TutorialPos;
+    public Vector3 Level01Pos;
+    public Transform CameraPos;
 
     public static GameManager Instance
     {
@@ -63,16 +66,21 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-     
+        //CameraPos.position = TutorialPos;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(stackScore >= nextStage)
-        {
-            SceneManager.LoadScene(1);
-        }
+        // 튜토리얼에서 특정 점수 도달시
+        // 레빌1로 위치이동
+        #region ㄹㅇㄹㅇㄹ
+        //if(stackScore >= nextStage)
+        //{
+        //    CameraPos.position = Level01Pos;
+        //}
+        #endregion 
     }
 
 }
