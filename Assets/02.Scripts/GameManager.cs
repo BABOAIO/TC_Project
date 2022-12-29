@@ -13,8 +13,11 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
 
     [SerializeField]
-    [Header("다음 씬으로 넘어가는 점수")]
-    private int nextStage = 0;
+    [Header("튜토리얼 -> 레벨1 로 넘어가는 점수")]
+    private int nextStageLevel01 = 500;
+    [SerializeField]
+    [Header("레벨1 -> 레벨2 로 넘어가는 점수")]
+    private int nextStageLevel02 = 3000;
     private bool isGameOver = false;
     public AudioClip audioClip;
     public GameObject gameOverText;
@@ -35,6 +38,12 @@ public class GameManager : MonoBehaviour
     Vector2 offVec = Vector2.zero;
     Renderer level2;
     Renderer level3;
+
+    // 점수 도달시 Level 벽을 없애기 위한 오브젝트 변수
+    public GameObject level02Wall;
+
+    // 3은 아직 미구현
+    // public GameObject level03Wall;
     public static GameManager Instance
     {
         get
@@ -104,11 +113,15 @@ public class GameManager : MonoBehaviour
         // 튜토리얼에서 특정 점수 도달시
         // 레빌1로 위치이동
         #region ㄹㅇㄹㅇㄹ
-        //if(stackScore >= nextStage)
+        //if(stackScore >= nextStageLevel01)
         //{
         //    CameraPos.position = Level01Pos;
         //    FadeOut();
         //}
+        if(stackScore >= nextStageLevel02)
+        {
+            level02Wall.SetActive(false);
+        }
         #endregion 
     }
 
