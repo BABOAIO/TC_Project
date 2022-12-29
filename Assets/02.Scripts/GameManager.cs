@@ -26,8 +26,15 @@ public class GameManager : MonoBehaviour
     // Fade Out 변수
     public Image image; // 검은색 화면
 
- 
+    // 밀림방지
+    private Rigidbody Vector3zero;
 
+    // 레벨 2 벽 이미지 변화
+    float speed = 2f;
+    float offset = 0.1f;
+    Vector2 offVec = Vector2.zero;
+    Renderer level2;
+    Renderer level3;
     public static GameManager Instance
     {
         get
@@ -74,11 +81,26 @@ public class GameManager : MonoBehaviour
     {
         //CameraPos.position = TutorialPos;
 
+        // 밀림방지를 위하여 "리지드바디"태그를 가진 오브젝트의 리지드바디 컴포넌트를 할당
+        Vector3zero = GameObject.FindWithTag("RigidBody").GetComponent<Rigidbody>();
+
+        // 렌더러 컴포넌트 할당
+        level2 = GameObject.FindWithTag("Level2").GetComponent<Renderer>();
+        level3 = GameObject.FindWithTag("Level3").GetComponent<Renderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // 물리적가속도 0으로 설정
+        Vector3zero.velocity= Vector3.zero;
+
+        // VECTOR2 변수에 값 할당
+        offVec += new Vector2(offset * speed * Time.deltaTime, 0);
+        // 태그네임 레벨2의 메테리얼컴포넌트의 오프셋 ++;
+
+        level2.material.SetTextureOffset("_MainTex",offVec);
+        level3.material.SetTextureOffset("_MainTex", offVec);
         // 튜토리얼에서 특정 점수 도달시
         // 레빌1로 위치이동
         #region ㄹㅇㄹㅇㄹ

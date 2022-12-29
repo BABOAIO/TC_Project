@@ -9,6 +9,9 @@ TagManager:
   - SELETABLE
   - SELECTABLE
   - PlayerAsh
+  - RigidBody
+  - Level2
+  - Level3
   layers:
   - Default
   - TransparentFX
