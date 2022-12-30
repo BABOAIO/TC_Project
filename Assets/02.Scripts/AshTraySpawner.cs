@@ -20,8 +20,8 @@ public class AshTraySpawner : MonoBehaviour
     private Animator animator;
     private int hp = 100;
     int loopNum = 0;
-    private bool isDie = false;         // 슈트맨의 사망 여부
-    private bool StandUp = false;
+    //private bool isDie = false;         // 슈트맨의 사망 여부
+    //private bool StandUp = false;
     private float currentTime = 0;
     public float DelayTime = 5;
     public float spawnHeight = 2.3f;
@@ -68,7 +68,7 @@ public class AshTraySpawner : MonoBehaviour
     {
         suitmanState = SuitManState.attack;
         animator.SetBool("StandUp", true);
-        StandUp = true;
+        //StandUp = true;
     }
 
     IEnumerator Ash()
@@ -78,31 +78,31 @@ public class AshTraySpawner : MonoBehaviour
     }
 
 
-    public void GetDamage(float amount)
-    {
-        if (isDie == true) return;
+    //public void GetDamage(float amount)
+    //{
+    //    if (isDie == true) return;
 
-        hp -= (int)(amount); 
-        animator.SetTrigger("IsHit");
+    //    hp -= (int)(amount); 
+    //    animator.SetTrigger("IsHit");
 
-        if (hp <= 0)
-            SuitManDie();
-    }
+    //    if (hp <= 0)
+    //        SuitManDie();
+    //}
 
-    void SuitManDie()
-    {
-        if (isDie == true) return;
+    //void SuitManDie()
+    //{
+    //    if (isDie == true) return;
 
-        //모든 코루틴을 정지
-        StopAllCoroutines();
-        isDie = true;
-        suitmanState = SuitManState.die;
-        animator.SetTrigger("IsDie");
+    //    //모든 코루틴을 정지
+    //    StopAllCoroutines();
+    //    isDie = true;
+    //    suitmanState = SuitManState.die;
+    //    animator.SetTrigger("IsDie");
 
 
 
-        // 점수 10000
-        FindObjectOfType<GameManager>().AddScore(10000);
+    //    // 점수 10000
+    //    FindObjectOfType<GameManager>().AddScore(10000);
 
-    }
+    //}
 }

@@ -12,6 +12,7 @@ TagManager:
   - RigidBody
   - Level2
   - Level3
+  - Tutorial
   layers:
   - Default
   - TransparentFX
