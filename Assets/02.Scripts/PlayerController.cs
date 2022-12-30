@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    
     public float hp = 100.0f;        //플레이어의 체력 변수
     public float maxHp = 100.0f;     //플레이어의 최대 체력 변수
     

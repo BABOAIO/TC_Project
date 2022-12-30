@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // 스테이지 단계
+    public enum StageState { tutorial, level1, level2 };
+    public StageState stage;
+
+
     private static GameManager instance = null;
 
     public int stackScore;
@@ -96,6 +101,8 @@ public class GameManager : MonoBehaviour
         // 렌더러 컴포넌트 할당
         level2 = GameObject.FindWithTag("Level2").GetComponent<Renderer>();
         level3 = GameObject.FindWithTag("Level3").GetComponent<Renderer>();
+
+        stage = StageState.tutorial;
     }
 
     // Update is called once per frame
@@ -113,13 +120,15 @@ public class GameManager : MonoBehaviour
         // 튜토리얼에서 특정 점수 도달시
         // 레빌1로 위치이동
         #region ㄹㅇㄹㅇㄹ
-        //if(stackScore >= nextStageLevel01)
-        //{
-        //    CameraPos.position = Level01Pos;
-        //    FadeOut();
-        //}
-        if(stackScore >= nextStageLevel02)
+        if (stackScore >= nextStageLevel01)
         {
+            stage = StageState.level1;
+            CameraPos.position = Level01Pos;
+            FadeOut();
+        }
+        if (stackScore >= nextStageLevel02)
+        {
+            stage = StageState.level2;
             level02Wall.SetActive(false);
         }
         #endregion 

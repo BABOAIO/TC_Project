@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static AshTraySpawner;
 
@@ -29,7 +30,6 @@ public class AshTraySpawner : MonoBehaviour
     {
         target = GameObject.FindWithTag("Player").GetComponent<Transform>();
         animator = this.gameObject.GetComponent<Animator>();
-
         Invoke("SuitStandUp", 5.0f);
 
         //animator.SetBool("StandUp", false);
@@ -44,14 +44,9 @@ public class AshTraySpawner : MonoBehaviour
         //timeAfterSpawn= Time.deltaTime;
         //if(StandUp)
         //{
-           
-
-           
+        
+        if(GameManager.Instance.stage == GameManager.StageState.level1) { 
           currentTime += 1;
-          
-
-    
-
         // StartCoroutine(this.SuitManAction());
 
         //print(suitmanState);
@@ -65,8 +60,8 @@ public class AshTraySpawner : MonoBehaviour
             }
            
         }
+        }
 
-        
     }
 
     public void SuitStandUp()
